@@ -5,7 +5,8 @@ from django.core.files import File
 from django.views.generic import DetailView
 
 from ..models import Speech
-from ..utils import get_result, convert_to_docx
+from ..utils import get_result
+# from ..utils import convert_to_docx
 
 
 class SpeechDetailView(DetailView):
@@ -26,21 +27,21 @@ class SpeechDetailView(DetailView):
                     self.object.convert_done = True
                     self.object.save()
 
-                    if self.object.title:
-                        title = self.object.title
-                    else:
-                        title = self.object.file_name
-                    if self.object.lecture_date:
-                        date = self.object.lecture_date.strftime('%Y년 %m월 %d일 %A')
-                    else:
-                        date = ''
+                    # if self.object.title:
+                    #     title = self.object.title
+                    # else:
+                    #     title = self.object.file_name
+                    # if self.object.lecture_date:
+                    #     date = self.object.lecture_date.strftime('%Y년 %m월 %d일 %A')
+                    # else:
+                    #     date = ''
 
-                    document = convert_to_docx(title, date, content)
-                    doing = content
-                    document.save(title + '.docx')
-                    f = open(title + '.docx')
-                    self.object.docx_input(title + '.docx', File(f))
-                    self.object.save()
+                    # document = convert_to_docx(title, date, content)
+                    # doing = content
+                    # document.save(title + '.docx')
+                    # f = open(title + '.docx')
+                    # self.object.docx_input(title + '.docx', File(f))
+                    # self.object.save()
 
                 else:
                     doing = "현재 {i} 퍼센트 완료되었습니다. 조금만 기다려 주세요.".format(i=content)
