@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/weather-icons.min.css' %}">
+<!-- <link rel="stylesheet" href="{% static 'css/weather.css' %}"> -->
+{% endblock %}
+
+{% block content %}
+{% include "home/weather.html" %}
+{% include "home/bookmark.html" %}
+
+{% endblock content %}
+
+{% block extrajs %}
+{% endblock extrajs %}

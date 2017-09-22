@@ -1,0 +1,93 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+
+{% block extrahead %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- Material Design icon font -->
+<style>
+    .util-center {
+        margin: auto;
+    }
+
+    .util-max-512px {
+        max-width: 512px;
+    }
+
+    .util-spacing-h--40px {
+        margin-top: 40px;
+        margin-bottom: 40px
+    }
+    .util-no-decoration {
+        text-decoration: none;
+    }
+</style>
+{% endblock %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+<body class="mdl-color--blue-grey-50">
+<div class="mdl-grid">
+	<div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
+		<div class="mdl-card__title mdl-color--cyan-600">
+			<h2 class="mdl-card__title-text mdl-color-text--white">로그인</h2>
+		</div>
+		<div class="mdl-card__supporting-text mdl-grid">
+			<b class="mdl-color-text--accent">
+			{% if form.errors %}
+				{% for field in form %}
+					{% for error in field.errors %}
+						<div class="alert alert-error">
+							<strong>{{ field.label }}는 {{ error|escape }}</strong>
+						</div>
+					{% endfor %}
+				{% endfor %}
+				{% for error in form.non_field_errors %}
+					<div class="alert alert-error">
+						<strong>{{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %}
+			</b>
+			<form class="login" method="POST" action="{% url 'account_login' %}">
+				{% csrf_token %}
+				<!-- {{ form.as_p }} -->
+				<!-- {% for field in form  %} -->
+				<!-- <label class="mdl-textfield__label mdl-color-text--grey" for="{{ field.name }}">{{ field.label }}</label> -->
+				<!-- 	{{ field }} -->
+				<!-- {% endfor %} -->
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="text" name="login" autofocus="autofocus" maxlength="20" id="id_login">
+					<label class="mdl-textfield__label" for="id_login">아이디</label>
+					<!-- <span class="mdl-textfield__error">3-15 characters with only lowercase letters, digits, underscore, and hyphen</span> -->
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input type="password" name="password" class="mdl-textfield__input" id="id_password">
+					<label class="mdl-textfield__label" for="id_password">비밀번호</label>
+				</div>
+				<div>
+					<label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="id_remember">
+						<input class="mdl-checkbox__input" type="checkbox" name="remember" id="id_remember">
+						<span class = "mdl-checkbox__label id_remember_checkbox">아이디 저장</span>
+					</label>
+				</div>
+				{% if redirect_field_value %}
+				<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+				{% endif %}
+				<div class="mdl-cell mdl-cell--12-col send-button" align="center">
+					<button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored mdl-color--primary account-btn" type="submit">{% trans "Sign In" %}</button>
+				</div>
+			</form>
+			<a class="button secondaryAction" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+			<p>{% blocktrans %} 아직 아이디가 없으신가요?
+			<a href="{{ signup_url }}">회원가입</a>을 하세요! {% endblocktrans %}</p>
+<script>
+$(document).ready(function() {
+	$('.login').addClass('selected');
+});
+</script>
+
+{% endblock %}

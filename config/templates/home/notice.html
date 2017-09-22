@@ -1,0 +1,35 @@
+<div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--8-col">
+	대학원 notice template
+	{{ now }} 시간까지 최신
+	<ul class="mdl-list">
+	{% for notice in notices %}
+		<li class="mdl-list__item mdl-list__item--three-line">
+			
+			<span class="mdl-list__item-primary-content">
+				<i class="material-icons mdl-list__item-avatar">
+					{% if notice.is_new %}
+					<!-- new_releases -->
+					turned_in
+					{% else %}
+					turned_in_not
+					{% endif %}
+				</i>
+				<span>{{ notice.title }}</span>
+				<span class="mdl-list__item-text-body">
+					{{ notice.date }}
+				</span>
+			</span>
+			<span class="mdl-list__item-secondary-content">
+				<a class="mdl-list__item-secondary-action" href="#">
+					{% if notice.is_important %}
+					<i class="material-icons">star</i>
+					{% else %}
+					<i class="material-icons">star_border</i>
+					{% endif %}
+				</a>
+			</span>
+
+		</li>
+	{% endfor %}
+	</ul>
+</div>

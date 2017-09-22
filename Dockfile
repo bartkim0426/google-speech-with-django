@@ -1,0 +1,10 @@
+FROM ubuntu:16.04
+
+MAINTAINER seulchan
+
+# Local directory with project source
+ENV DOCKYARD_SRC=speech/django-speech
+# Directory in container for all project files
+ENV DOCKYARD_SRVHOME=/srv
+# Directory in container for project source files
+ENV DOCKYARD_SRVPROJ=$DOCKYARD_SRVHOME/$DOCKYARD_SRC

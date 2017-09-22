@@ -1,0 +1,26 @@
+<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--3-col mdl-grid">
+	<ul class="mdl-list bookmark-list">
+		{% for bookmark in bookmarks %}
+		<li class="mdl-list__item bookmark-item">
+			<span 
+				{% if bookmark.hover and request.user.is_staff %}
+				title="{{ bookmark.hover }}"
+				{% endif %} 
+				class="mdl-list__item-primary-content">
+				<i class="material-icons mdl-list__item-icon">{{ bookmark.icon }}</i>
+				<a class="bookmark" href="{{ bookmark.url }}" target="_blank">
+				{{ bookmark.title }}
+				</a>
+			</span>
+		</li>
+		{% endfor %}
+		<li class="mdl-list__item bookmark-item">
+			<span class="mdl-list__item-primary-content">
+				<i class="material-icons mdl-list__item-icon">add</i>
+				<a class="bookmark" href="/admin/bookmark/bookmark/add/" target="_blank">
+				북마크 추가하기
+				</a>
+			</span>
+		</li>
+	</ul>
+</div>

@@ -1,0 +1,29 @@
+a.accounts {
+	text-decoration: none !important;
+}
+
+span.id_remember_checkbox {
+	font-size: 12px !important;
+}
+
+span.help-text {
+	font-size: 8px !important;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+button.account-btn {
+	color: white !important;
+}
+
+li.bookmark-item {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+ul.bookmark-list {
+	margin: 0px;
+}
+
+a.bookmark {
+	text-decoration: none;
+}

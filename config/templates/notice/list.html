@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% load static %}
+{% load tz %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/weather-icons.min.css' %}">
+<style>
+.deactive {
+	display: none;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+	<div class="refresh-toast">
+		<button id="notice-toast-show" class="mdl-button mdl-js-button mdl-button--raised refresh-notice" type="button">Refresh</button>
+		<div id="notice-toast" class="mdl-js-snackbar mdl-snackbar">
+			<div class="mdl-snackbar__text"></div>
+			<button class="mdl-snackbar__action" type="button"></button>
+		</div>
+	</div>
+
+	<ul class="mdl-list">
+	{% for notice in object_list %}
+		<li class="mdl-list__item mdl-list__item--three-line">
+			
+			<span class="mdl-list__item-primary-content">
+
+				{% if notice.is_new %}
+				<i class="material-icons mdl-list__item-icon mdl-badge mdl-badge--overlap" data-badge="new">
+				label
+				</i>
+				{% else %}
+				<i class="material-icons mdl-list__item-icon mdl-badge">
+					label
+				</i>
+				{% endif %}
+				<span>{{ notice.title }}</span>
+				<span class="mdl-list__item-text-body">
+					{{ notice.date }}
+				</span>
+			</span>
+			<span class="mdl-list__item-secondary-content">
+				<a class="mdl-list__item-secondary-action like" href="#" name="{{ notice.id }}">
+					{% if notice.is_important %}
+
+					<!-- Icon button -->
+					<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+						<i class="material-icons like_img active">star</i>
+						<i class="material-icons like_img deactive">star_border</i>
+					</button>
+					{% else %}
+					<button class="mdl-button mdl-js-button mdl-button--icon mdl-js-ripple-effect">
+						<i class="material-icons like_img deactive">star</i>
+						<i class="material-icons like_img active">star_border</i>
+					</button>
+					{% endif %}
+				</a>
+			</span>
+
+		</li>
+	{% endfor %}
+	</ul>
+</div>
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'js/moment.js' %}"></script>
+<script>
+$('.like').click(function(e){
+	e.preventDefault();
+	$(this).find('.like_img').toggleClass('active deactive');
+	$.ajax({
+		type: "POST",
+		url: "{% url 'notice:important' %}",
+		data: {'pk': $(this).attr('name'), 'csrfmiddlewaretoken': '{{ csrf_token }}'},
+		dataType: "json",
+		success: function(response) {
+					//alert(response.message);
+		},
+		error: function(rs, e) {
+					 //alert(rs.responseText);
+		}
+	}); 
+});
+
+(function() {
+  'use strict';
+	//window['date'] = Date().toLocaleString();
+	window['date'] = moment().format('LLL');
+	var now_time = (new Date()).toJSON();
+  var snackbarContainer = document.querySelector('#notice-toast');
+  var showToastButton = document.querySelector('#notice-toast-show');
+  showToastButton.addEventListener('click', function() {
+    'use strict';
+    var data = {message: date + ' 시 기준 새로운 공지를 가져왔어요~ 뿅!' };
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+		$.ajax({
+			type: "POST",
+			url: "{% url 'notice:refresh' %}",
+			data: {'csrfmiddlewaretoken': '{{ csrf_token }}', 'now_time': now_time},
+			dataType: "json",
+			success: function(response) {
+						//alert(response.now);
+			},
+			error: function(rs, e) {
+						 //alert(rs.responseText);
+			}
+		});
+  });
+}());
+</script>
+{% endblock extrajs %}

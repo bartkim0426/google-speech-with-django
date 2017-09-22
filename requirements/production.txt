@@ -1,0 +1,47 @@
+# for using google api
+# install google-cloud first if there's error
+google-cloud
+
+# testing in django 1.11.5
+django
+
+# for images
+Pillow
+
+# Python-postgresql db adapter
+psycopg2
+
+# django-admin library
+# django-suit==0.2.25
+
+# django suit v2
+-e git://github.com/darklow/django-suit.git@v2#egg=django-suit
+
+# for easy file upload
+django-filer
+
+# easy_thumbnail version with no error
+easy-thumbnails==2.4.1
+
+# managing environ and setting base, project dir
+django-environ
+
+# using json type data
+jsonfield
+
+# for crawling data
+requests
+beautifulsoup4
+selenium
+
+# audio transporting
+pydub
+
+# easy login/out
+django-allauth
+
+# using mdl easily
+django-material
+
+# convert to .docx file
+python-docx

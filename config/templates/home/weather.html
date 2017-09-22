@@ -1,0 +1,17 @@
+<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-grid"> <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+		<form action="/" method="GET">
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fullwidth">
+				{% for field in form %}
+				<label for="{{ field.id }}" class="mdl-textfield__label">{{ field.label }}</label>
+				{{ field }}
+				{% endfor %} 
+			</div>
+		</form>
+		<i class="wi wi-rain"></i>
+		<p>현재기온: {{ weather.temperature.tc }} <i class="wi wi-celsius"></i></p>
+		<p>현재상태: {{ weather.sky.name }}</p>
+		<p>강수정보: {{ weather.precipitation.sinceOntime }}</p>
+		<!-- <p>{{ weather.precipitation }}</p> -->
+		<p>현재습도: {{ weather.humidity }}</p>
+	</div>
+</div>

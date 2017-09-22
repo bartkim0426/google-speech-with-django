@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/convert.css' %}">
+{% endblock extrahead %}
+
+{% block content %}
+<div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-grid convert">
+	<div class="convert-div">
+		<img class="convert-icon" src="{% static 'images/icons/music-icon-circle.png' %}" alt="music-icon">
+		<img class="convert-icon" src="{% static 'images/icons/script-icon-circle-orange.png' %}" alt="script-icon">
+	</div>
+
+		<form class="convert-form" action="" method="POST">
+			{% csrf_token %}
+			{% for field in form %}
+			<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label convert-form-div">
+					<label class="mdl-textfield__label" for="{{ field.name }}">{{ field.label }}</label>
+					{{ field }}
+					{% if field.name == 'file_name' %}
+					<span class="mdl-textfield__error">google storage에 적은 파일명을 입력해주세요</span>
+					{% endif %}
+			</div>
+			{% endfor %}
+			<!-- Icon button -->
+			<button type="submit" class="mdl-button mdl-js-button mdl-button--icon--colored" title="변환하기">
+				<div id="tt1" class="icon material-icons">autorenew</div>
+				<div class="mdl-tooltip" data-mdl-for="tt1">
+					변환하기
+				</div>
+			</button>
+		</form>
+</div>
+{% endblock content %}

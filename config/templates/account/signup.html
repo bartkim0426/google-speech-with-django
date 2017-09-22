@@ -1,0 +1,76 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Signup" %}{% endblock %}
+
+{% block content %}
+
+<body class="mdl-color--blue-grey-50">
+<div class="mdl-grid">
+	<div class="mdl-card mdl-shadow--16dp util-center util-spacing-h--40px">
+		<div class="mdl-card__title mdl-color--cyan-600">
+			<h2 class="mdl-card__title-text mdl-color-text--white">회원가입</h2>
+		</div>
+		<div class="mdl-card__supporting-text mdl-grid">
+			<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+			<b class="mdl-color-text--accent">
+			{% if form.errors %}
+				{% for field in form %}
+					{% for error in field.errors %}
+						<div class="alert alert-error">
+							<strong>{{ field.label }}는 {{ error|escape }}</strong>
+						</div>
+					{% endfor %}
+				{% endfor %}
+				{% for error in form.non_field_errors %}
+					<div class="alert alert-error">
+						<strong>{{ error|escape }}</strong>
+					</div>
+				{% endfor %}
+			{% endif %}
+			</b>
+
+			<form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+				{% csrf_token %}
+				<!-- {{ form.as_p }} -->
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="text" name="username" autofocus="autofocus" minlength="6" maxlength="20" id="id_username" pattern="[A-Z,a-z,0-9]*">
+					<label class="mdl-textfield__label" for="id_username">아이디</label>
+					<span class="mdl-textfield__error">6자 이상, 알파벳소문자, 숫자만 적어주세용~</span>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="email" name="email" id="id_email">
+					<label class="mdl-textfield__label" for="id_email">이메일</label>
+					<span class="mdl-textfield__error">메일 형식이라도 맞춰달라구요.. 비밀번호 찾을때 필요해요</span>
+				</div>
+				<!-- <div> -->
+				<!-- 	<span class="help-text">메일 형식이라도 맞춰달라구요..</span> -->
+				<!-- </div> -->
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="password" name="password1" id="id_password1" minlength="8">
+					<label class="mdl-textfield__label" for="id_password1">비밀번호</label>
+					<span class="mdl-textfield__error">8자 이상 적어주는 센스!</span>
+				</div>
+				<div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+					<input class="mdl-textfield__input" type="password" name="password2" id="id_password2">
+					<label class="mdl-textfield__label" for="id_password2">비밀번호(확인)</label>
+				</div>
+				{% if redirect_field_value %}
+				<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+				{% endif %}
+				<div class="mdl-cell mdl-cell--12-col send-button" align="center">
+					<button class="mdl-button mdl-js-ripple-effect mdl-js-button mdl-button--raised mdl-button--colored mdl-color--primary account-btn" type="submit">회원가입</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+$(document).ready(function() {
+	$('.register').addClass('selected');
+});
+</script>
+
+{% endblock %}

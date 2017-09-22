@@ -1,0 +1,60 @@
+{% load static %}
+<header class="demo-header mdl-layout__header mdl-color--grey-100 mdl-color-text--grey-600">
+	<div class="mdl-layout__header-row">
+		<span class="mdl-layout-title">
+			{% if title %}
+			{{ title }}
+			{% else %}
+			{% endif %}
+		</span>
+		<div class="mdl-layout-spacer"></div>
+		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
+		<!-- Icon badge on icon -->
+		<!-- <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="♥">account_circle</div> -->
+			<i class="material-icons">account_circle</i>
+		</button>
+		<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
+			{% if request.user.is_authenticated %}
+			<a class="accounts" href="{% url 'account_logout' %}"><li class="mdl-menu__item">Logout</li></a>
+			<a class="accounts" href="{% url 'account_change_password' %}"><li class="mdl-menu__item">Change Password</li></a>
+			{% else %}
+			<a class="accounts" href="{% url 'account_login' %}"><li class="mdl-menu__item">Login</li></a>
+			<a class="accounts" href="{% url 'account_signup' %}"><li class="mdl-menu__item">SignUp</li></a>
+			{% endif %}
+		</ul>
+	</div>
+</header>
+
+<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+	<header class="demo-drawer-header">
+
+		{% if request.user.username == 'suwon0126' %}
+		<img src="{% static 'images/suwon.png' %}" class="demo-avatar">
+		{% else %}
+		<img src="{% static 'images/user.jpg' %}" class="demo-avatar">
+		{% endif %}
+		<div class="demo-avatar-dropdown">
+			{% if request.user.is_authenticated %}
+			<span>{{ user.username }}</span>
+			{% else %}
+			<span>Guest</span>
+			{% endif %}
+			<div class="mdl-layout-spacer"></div>
+			<button id="accbtn" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+				<i class="material-icons" role="presentation">arrow_drop_down</i>
+				<span class="visuallyhidden">Accounts</span>
+			</button>
+			<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="accbtn">
+				{% if request.user.is_authenticated %}
+				<a class="accounts" href="{% url 'account_logout' %}"><li class="mdl-menu__item">Logout</li></a>
+				<a class="accounts" href="{% url 'account_change_password' %}"><li class="mdl-menu__item">Change Password</li></a>
+				{% else %}
+				<a class="accounts" href="{% url 'account_login' %}"><li class="mdl-menu__item">Login</li></a>
+				<!-- <a class="accounts" href="{% url 'account_signup' %}"><li class="mdl-menu__item">SignUp</li></a> -->
+				{% endif %}
+				<a class="accounts" href="{% url 'account_signup' %}"><li class="mdl-menu__item"><i class="material-icons">add</i>Add another account...</li></a>
+			</ul>
+		</div>
+	</header>
+	{% include "nav.html" %}
+</div>

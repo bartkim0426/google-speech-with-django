@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+	<h1>Detail Page</h1>
+	<p>
+	{{ speech }}
+	</p>
+	<p>
+	{% if speech.content %}
+	{{ speech.content }}
+	{% else %}
+	{{ doing }}
+	{% endif %}
+	</p>
+</div>
+{% endblock content %}

@@ -1,0 +1,24 @@
+img.convert-icon {
+	width: 200px;
+}
+
+div.convert-form-div {
+	display: block;
+}
+
+div.convert {
+	display: block;
+}
+
+div.convert-div {
+	display: block;
+	margin: auto;
+	width: 60%;
+	padding: 10px;
+}
+
+form.convert-form {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+}
