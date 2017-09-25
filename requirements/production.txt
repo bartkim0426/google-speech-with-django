@@ -45,3 +45,7 @@ django-allauth
 
 # convert to .docx file
 # python-docx
+
+python-dateutil
+
+gunicorn
