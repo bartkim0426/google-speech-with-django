@@ -1,0 +1,34 @@
+.mdl-card__media {
+	margin: 0;
+}
+.mdl-card__actions {
+  display: flex;
+  box-sizing:border-box;
+  align-items: center;
+}
+.mdl-card__actions > .mdl-button--icon {
+  margin-right: 3px;
+  margin-left: 3px;
+}
+
+.material-icons.checked { 
+	color: #24a717;
+}
+
+.material-icons.no--checked {
+	color: #e8e0e0;
+}
+
+.supporting {
+	color: #bbbbbb;
+	font-size: 12px;
+}
+
+.mdl-grid .mdl-grid--nesting {
+  padding: 0;
+  margin: 0 -8px;
+}
+
+.no--file {
+	color: #e8e0e0 !important;
+}

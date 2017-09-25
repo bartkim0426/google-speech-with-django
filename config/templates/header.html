@@ -8,30 +8,31 @@
 			{% endif %}
 		</span>
 		<div class="mdl-layout-spacer"></div>
-		<button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn">
-		<!-- Icon badge on icon -->
-		<!-- <div class="material-icons mdl-badge mdl-badge--overlap" data-badge="♥">account_circle</div> -->
-			<i class="material-icons">account_circle</i>
-		</button>
-		<ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn">
-			{% if request.user.is_authenticated %}
-			<a class="accounts" href="{% url 'account_logout' %}"><li class="mdl-menu__item">Logout</li></a>
-			<a class="accounts" href="{% url 'account_change_password' %}"><li class="mdl-menu__item">Change Password</li></a>
-			{% else %}
-			<a class="accounts" href="{% url 'account_login' %}"><li class="mdl-menu__item">Login</li></a>
-			<a class="accounts" href="{% url 'account_signup' %}"><li class="mdl-menu__item">SignUp</li></a>
-			{% endif %}
-		</ul>
+		<img class="ku-icon" src="{% static 'images/ku_symbol.gif' %}" alt="ku_mark" style="height: 40px">
+		<!-- <img class="ku-icon" src="{% static 'images/ku_mark.gif' %}" alt="ku_mark" style="height: 50px"> -->
+		<!-- <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" id="hdrbtn"> -->
+		<!-- 	<i class="material-icons">account_circle</i> -->
+		<!-- </button> -->
+		<!-- <ul class="mdl-menu mdl-js-menu mdl-js-ripple-effect mdl-menu--bottom-right" for="hdrbtn"> -->
+		<!-- 	{% if request.user.is_authenticated %} -->
+		<!-- 	<a class="accounts" href="{% url 'account_logout' %}"><li class="mdl-menu__item">Logout</li></a> -->
+		<!-- 	<a class="accounts" href="{% url 'account_change_password' %}"><li class="mdl-menu__item">Change Password</li></a> -->
+		<!-- 	{% else %} -->
+		<!-- 	<a class="accounts" href="{% url 'account_login' %}"><li class="mdl-menu__item">Login</li></a> -->
+		<!-- 	<a class="accounts" href="{% url 'account_signup' %}"><li class="mdl-menu__item">SignUp</li></a> -->
+		<!-- 	{% endif %} -->
+		<!-- </ul> -->
 	</div>
 </header>
 
-<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50">
+<div class="demo-drawer mdl-layout__drawer mdl-color--blue-grey-900 mdl-color-text--blue-grey-50 profile-crimson">
 	<header class="demo-drawer-header">
 
 		{% if request.user.username == 'suwon0126' %}
 		<img src="{% static 'images/suwon.png' %}" class="demo-avatar">
 		{% else %}
 		<img src="{% static 'images/user.jpg' %}" class="demo-avatar">
+		<!-- <img style="height: auto; width: 50px;" class="" src="{% static 'images/ku_tiger_grey.gif' %}" alt=""> -->
 		{% endif %}
 		<div class="demo-avatar-dropdown">
 			{% if request.user.is_authenticated %}

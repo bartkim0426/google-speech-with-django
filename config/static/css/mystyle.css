@@ -27,3 +27,33 @@ ul.bookmark-list {
 a.bookmark {
 	text-decoration: none;
 }
+
+.mdl-card__media {
+	background-color: #b5a4a4a6 !important;
+}
+
+img.ku_icon {
+	width: 30px;
+	height: 30px;
+}
+
+.profile-crimson {
+	background-color: #771616 !important;
+}
+
+.nav-beige {
+	background-color: rgb(206, 193, 177) !important;
+}
+
+.demo-layout .demo-navigation .mdl-navigation__link:hover {
+	background-color: #ffffff !important;
+	color: #771616;
+}
+
+.mdl-navigation__link {
+	color: #757575 !important;
+}
+
+.mdl-layout__header-row {
+	background-color: white;
+}

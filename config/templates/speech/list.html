@@ -1,19 +1,7 @@
 {% extends "base.html" %}
+{% load static %}
 {% block extrahead %}
-<style>
-.mdl-card__media {
-	margin: 0;
-}
-.mdl-card__actions {
-  display: flex;
-  box-sizing:border-box;
-  align-items: center;
-}
-.mdl-card__actions > .mdl-button--icon {
-  margin-right: 3px;
-  margin-left: 3px;
-}
-</style>
+<link rel="stylesheet" href="{% static 'css/speech_list.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -25,57 +13,74 @@
 		</figure>
 		<div class="mdl-card__title">
 			<a href="{% url "speech:detail" speech.id %}">
-				<h1 class="mdl-card__title-text">{{ speech.title }}</h1>
+				<h1 class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">{{ speech.lecture_date |date:"M d일 D"}}</h1>
 			</a>
 		</div>
 		<div class="mdl-card__supporting-text">
-			{{ speech.file_name }}.mp3 파일 변환 
-			{% if speech.lecture_date %}
-			<p>({{ speech.lecture_date }})</p>
-			{% endif %}
+			{{ speech.memo }}
 		</div>
 		<div class="mdl-card__actions mdl-card--border">
-			<a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Read More</a>
+			<div>
+				<div>
+					변환파일
+					{% if speech.docx_input.name != '' %} <!-- convert_done -->
+					<a href="{{ speech.docx_input.url }}" download><button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">attach_file</i></button></a>
+					{% else %}
+					<button class="mdl-button mdl-button--icon mdl-button--colored no--file" disabled><i class="material-icons">attach_file</i></button>
+					{% endif %}
+				</div>
+				<!-- <div> -->
+				<!-- 	파일다운 -->
+				<!-- 	<button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">attach_file</i></button> -->
+				<!-- </div> -->
+			</div>
+
 			<div class="mdl-layout-spacer"></div>
-			<button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">favorite</i></button>
-			<button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">share</i></button>
+			완료파일
+			{% if speech.transcribe_done %}<!-- change to transcribe_done -->
+			<a href="{{ speech.docx_output.url }}" download="{{ speech.file_name }}"><button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">attach_file</i></button></a>
+			{% else %}
+				<button class="mdl-button mdl-button--icon mdl-button--colored no--file" disabled><i class="material-icons">attach_file</i></button>
+			{% endif %}
+			<!-- <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Read More</a> -->
+			<div class="mdl-layout-spacer"></div>
 		</div>
 	</div>
 	{% endfor %}
 </div>
 
-{% for speech in speeches %}
+<!-- {% for speech in speeches %} -->
 
-<div>
-	<h2>제목:{{ speech.title }}</h2>
-	<p>파일명:{{ speech.file_name }}</p>
-	<p>생성일: {{ speech.created_at }}</p>
-	<p>변환완료(100%): {{ speech.convert_done }}</p>
-	<p>수정완료(100%): {{ speech.transcribe_done }}</p>
-	<p>operation_name: {{ speech.operation_name }}</p>
+<!-- <div> -->
+<!-- 	<h2>제목:{{ speech.title }}</h2> -->
+<!-- 	<p>파일명:{{ speech.file_name }}</p> -->
+<!-- 	<p>생성일: {{ speech.created_at }}</p> -->
+<!-- 	<p>변환완료(100%): {{ speech.convert_done }}</p> -->
+<!-- 	<p>수정완료(100%): {{ speech.transcribe_done }}</p> -->
+<!-- 	<p>operation_name: {{ speech.operation_name }}</p> -->
 
-	<p>변환파일{{ speech.docx_input }}</p>
-  <form method="post" enctype="multipart/form-data" novalidate>
-    {% csrf_token %}
-		{{ form.as_p }}
-		<label for="id_docx_input">수정 전 파일</label>
-		<input type="file" name="docx_input" id="id_docx_input">
-		<input type="hidden" name="speech_pk" value="{{ speech.pk }}">
-		<input type="submit">변환파일올리기
-	</form>
+<!-- 	<p>변환파일{{ speech.docx_input }}</p> -->
+<!--   <form method="post" enctype="multipart/form-data" novalidate> -->
+<!--     {% csrf_token %} -->
+<!-- 		{{ form.as_p }} -->
+<!-- 		<label for="id_docx_input">수정 전 파일</label> -->
+<!-- 		<input type="file" name="docx_input" id="id_docx_input"> -->
+<!-- 		<input type="hidden" name="speech_pk" value="{{ speech.pk }}"> -->
+<!-- 		<input type="submit">변환파일올리기 -->
+<!-- 	</form> -->
 
-	<p>수정파일{{ speech.docx_output }}</p>
-  <form method="post" enctype="multipart/form-data" novalidate>
-    {% csrf_token %}
-		{{ form.as_p }}
-		<label for="id_docx_output">수정 후 파일</label>
-		<input type="file" name="docx_output" id="id_docx_output">
-		<input type="hidden" name="speech_pk" value="{{ speech.pk }}">
-		<input type="submit">변환파일올리기
-	</form>
+<!-- 	<p>수정파일{{ speech.docx_output }}</p> -->
+<!--   <form method="post" enctype="multipart/form-data" novalidate> -->
+<!--     {% csrf_token %} -->
+<!-- 		{{ form.as_p }} -->
+<!-- 		<label for="id_docx_output">수정 후 파일</label> -->
+<!-- 		<input type="file" name="docx_output" id="id_docx_output"> -->
+<!-- 		<input type="hidden" name="speech_pk" value="{{ speech.pk }}"> -->
+<!-- 		<input type="submit">변환파일올리기 -->
+<!-- 	</form> -->
 
-	<a href="{% url "speech:detail" speech.id %}"><button>결과 확인하기</button></a>
-</div>
+<!-- 	<a href="{% url "speech:detail" speech.id %}"><button>결과 확인하기</button></a> -->
+<!-- </div> -->
 
-{% endfor %}
+<!-- {% endfor %} -->
 {% endblock content %}

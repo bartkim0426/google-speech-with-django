@@ -3,7 +3,7 @@
 google-cloud
 
 # testing in django 1.11.5
-django
+django==1.11.5
 
 # for images
 Pillow
@@ -27,7 +27,7 @@ easy-thumbnails==2.4.1
 django-environ
 
 # using json type data
-jsonfield
+# jsonfield
 
 # for crawling data
 requests
@@ -41,7 +41,7 @@ pydub
 django-allauth
 
 # using mdl easily
-django-material
+# django-material
 
 # convert to .docx file
 # python-docx

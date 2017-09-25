@@ -8,7 +8,7 @@
 	</p>
 	<p>
 	{% if speech.content %}
-	{{ speech.content }}
+	{{ speech.content | linebreaks }}
 	{% else %}
 	{{ doing }}
 	{% endif %}
