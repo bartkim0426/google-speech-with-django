@@ -18,9 +18,6 @@ THIRD_PARTY_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'material',
-    'material.frontend',
-    'material.admin',
 ]
 
 LOCAL_APPS = [

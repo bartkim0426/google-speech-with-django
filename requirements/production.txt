@@ -1,6 +1,6 @@
 # for using google api
 # install google-cloud first if there's error
-google-cloud
+# google-cloud
 
 # testing in django 1.11.5
 django==1.11.5
