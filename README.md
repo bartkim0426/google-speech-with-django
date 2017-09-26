@@ -29,11 +29,13 @@
 - [X]: suwon 권한-home에서 help-text는 suwon0126에서만
 - [X]: 파일 변환중일 때 doing 관련 수정하기-test 필요?
 - [X]: notice list bookmark 기능
-- [ ]: 배포- docker 사용해서해보기
-- [ ]: List page - mdl card 사용해서 front 정렬
+- [X]: List page - mdl card 사용해서 front 정렬
 - [ ]: List page - speech 완료시 자동으로 변환 파일(docx) 만들어서 업로드 + 변환 status = True
+- [ ]: mp3, flac 파일 다운로드 후 삭제기능 추가(추후 disk 용량 관련)
+- [ ]: 배포하기 (nginx + gunicorn)
 
 **optional**
+- [ ]: 배포- docker 사용해서해보기
 - [ ]: react 사용해서 notice 공지 열기/닫기 추가
 - [ ]: react 사용해서 filter text 해보기
 - [ ]: session; guest일시 session 주기, session 타임아웃 설정(notice crawling 위해서) - 보류, 현재 refresh 버튼 사용
