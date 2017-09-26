@@ -15,6 +15,7 @@ def get_ku_notice():
     soup = BeautifulSoup(data, 'html.parser')
     col_li = soup.select(".views-column")
     notice_nids = [i.nid for i in Notice.objects.all()]
+    now = datetime.date.today()
 
     for col in col_li:
         nid = col.select_one(".view-nid").get_text()[2:]
@@ -22,7 +23,6 @@ def get_ku_notice():
         if int(nid) in notice_nids:
             notice = Notice.objects.get(nid=nid)
 
-            now = datetime.date.today()
             sub_timedelta = (now - notice.date).days
 
             if sub_timedelta > 7:
@@ -39,9 +39,18 @@ def get_ku_notice():
             link = col.select_one("a")
             detail_url = 'http://biz.korea.ac.kr' + link.get_attribute_list('href')[0]
 
-            Notice.objects.create(
+            notice = Notice.objects.create(
+                nid=nid,
                 title=title,
                 body=body,
                 date=dt,
                 detail_url=detail_url,
             )
+            sub_timedelta = (now - notice.date).days
+
+            if sub_timedelta > 7:
+                notice.is_new = False
+                notice.save()
+            else:
+                notice.is_new = True
+                notice.save()
