@@ -3,8 +3,16 @@ import os
 from .partials import *
 
 
-DEBUG = False
+DEBUG = True
 # INTERNAL_IPS = ['1.234.21.73', ]
+INSTALLED_APPS += [
+    'debug_toolbar',
+    'django_extensions',
+]
+
+MIDDLEWARE += ['debug_toolbar.middleware.DebugToolbarMiddleware', ]
+
+INTERNAL_IPS = ['127.0.0.1', ]
 
 DATABASES = {
     'default': {
