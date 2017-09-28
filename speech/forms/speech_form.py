@@ -10,7 +10,7 @@ class DateInput(forms.DateInput):
 class SpeechForm(ModelForm):
     class Meta:
         model = Speech
-        fields = ['file_name', 'title', 'lecture_date', 'memo']
+        fields = ['file_name', 'lecture_date', 'memo']
         widgets = {
             'lecture_date': forms.DateInput(
                 format=('%m/%d/%Y'),
@@ -26,7 +26,7 @@ class SpeechForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(SpeechForm, self).__init__(*args, **kwargs)
         self.fields['file_name'].widget.attrs['class'] = "mdl-textfield__input"
-        self.fields['title'].widget.attrs['class'] = "mdl-textfield__input"
+        # self.fields['title'].widget.attrs['class'] = "mdl-textfield__input"
         self.fields['memo'].widget.attrs['class'] = "mdl-textfield__input"
         # self.fields['lecture_date'].widget.attrs = {
         #     'class': 'mdl-textfield__input',

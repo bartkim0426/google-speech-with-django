@@ -10,19 +10,16 @@ from ..utils import call_transcribe_request
 
 class Speech(TimeStampedModel):
     # api_data = JSONField()
-    title = models.CharField(
-        verbose_name="제목",
-        max_length=50,
-        null=True,
-        blank=True,
-    )
     lecture_date = models.DateField(
         verbose_name="날짜",
+    )
+    content = models.TextField(
+        verbose_name="수정전내용",
         null=True,
         blank=True,
     )
-    content = models.TextField(
-        verbose_name="내용",
+    content_done = models.TextField(
+        verbose_name="수정완료내용",
         null=True,
         blank=True,
     )
