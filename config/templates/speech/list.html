@@ -39,8 +39,12 @@
 			완료파일
 			{% if speech.transcribe_done %}<!-- change to transcribe_done -->
 			<a href="{{ speech.docx_output.url }}" download="{{ speech.file_name }}"><button class="mdl-button mdl-button--icon mdl-button--colored"><i class="material-icons">attach_file</i></button></a>
+			{% elif request.user.is_staff %}
+			<a title="완료파일업로드" href="/admin/speech/speech/{{ speech.id }}/change">
+				<button class="mdl-button mdl-button--icon mdl-button--colored no--file"><i class="material-icons">attach_file</i></button>
+			</a>
 			{% else %}
-				<button class="mdl-button mdl-button--icon mdl-button--colored no--file" disabled><i class="material-icons">attach_file</i></button>
+				<button class="mdl-button mdl-button--icon mdl-button--colored no--file"><i class="material-icons">attach_file</i></button>
 			{% endif %}
 			<!-- <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">Read More</a> -->
 			<div class="mdl-layout-spacer"></div>
