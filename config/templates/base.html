@@ -43,6 +43,19 @@
 			</main>
 		</div>
     <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+	<script>
+	  // Initialize Firebase
+	  var config = {
+		apiKey: "AIzaSyDOQR00bjoFn7guiD346I-creQ7VmamqL0",
+		authDomain: "speech-api-178908.firebaseapp.com",
+		databaseURL: "https://speech-api-178908.firebaseio.com",
+		projectId: "speech-api-178908",
+		storageBucket: "speech-api-178908.appspot.com",
+		messagingSenderId: "401343068086"
+	  };
+	  firebase.initializeApp(config);
+	</script>
 		{% block extrajs %}
 		{% endblock extrajs %}
 	</body>

@@ -104,3 +104,6 @@ ENV/
 # audo file
 *.mp3
 *.flac
+
+mediafiles/*
+*.docx

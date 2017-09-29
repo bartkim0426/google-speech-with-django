@@ -20,6 +20,7 @@ def get_result(operation_name):
             return result
         else:
             doing = progress
+            return doing
     except:
         doing = 0
         print(doing)

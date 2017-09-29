@@ -7,7 +7,7 @@ from ..forms import InputFileForm
 
 
 class UploadView(View):
-    speeches = Speech.objects.all().order_by('-created_at')
+    speeches = Speech.objects.all().order_by('created_at')
 
     def get(self, request):
         context_dict = {
