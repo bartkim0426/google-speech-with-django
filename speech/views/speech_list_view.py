@@ -43,15 +43,16 @@ class UploadView(View):
         return render(request, template_name, context_dict)
 
 
-# class SpeechListView(ListView):
-#     model = Speech
-#     template_name = "speech/list.html"
-#     context_object_name = "speeches"
+class SpeechListView(ListView):
+    queryset = Speech.objects.order_by('lecture_date')
+    # model = Speech
+    template_name = "speech/list.html"
+    context_object_name = "speeches"
 
-#     def get_context_data(self, **kwargs):
-#         context = super(SpeechListView, self).get_context_data(**kwargs)
-#         context['title'] = 'LIST'
-#         return context
+    def get_context_data(self, **kwargs):
+        context = super(SpeechListView, self).get_context_data(**kwargs)
+        context['title'] = 'LIST'
+        return context
 
 # CreateView는 object 생성
 # class UploadFileView(CreateView):
