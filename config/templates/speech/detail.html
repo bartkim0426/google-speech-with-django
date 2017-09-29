@@ -1,17 +1,32 @@
 {% extends "base.html" %}
 
+{% load static %}
+{% block extrahead %}
+<link rel="stylesheet" href="{% static 'css/speech_detail.css' %}">
+{% endblock %}
+
+
 {% block content %}
-<div>
-	<h1>Detail Page</h1>
-	<p>
-	{{ speech }}
-	</p>
-	<p>
-	{% if speech.content %}
-	{{ speech.content | linebreaks }}
-	{% else %}
-	{{ doing }}
-	{% endif %}
-	</p>
-</div>
+<main class = "mdl-layout__content">    
+	<div class = "mdl-tabs mdl-js-tabs">
+		<div class = "mdl-tabs__tab-bar">
+			<a href = "#tab1-panel" class = "mdl-tabs__tab is-active">변환완료 스크립트</a>
+			<a href = "#tab2-panel" class = "mdl-tabs__tab">수정완료 스크립트</a>
+		</div>
+		<div class="demo-content mdl-color--white mdl-shadow--4dp content mdl-color-text--grey-800 mdl-cell mdl-cell--12-col">
+			<div class="mdl-tabs__panel is-active" id="tab1-panel">
+				{% if speech.content %}
+				{{ speech.content | linebreaks }}
+				{% else %}
+				{{ doing }}
+				{% endif %}
+			</div>
+			<div class="mdl-tabs__panel" id="tab2-panel">
+				{% if speech.content_done %}
+				{{ speech.content_done | linebreaks }}
+				{% else %}
+				아직 수정 전입니다.
+				{% endif %}
+			</div>
+		</div>
 {% endblock content %}
