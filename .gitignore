@@ -107,3 +107,5 @@ ENV/
 
 mediafiles/*
 *.docx
+
+staticfiles/*
