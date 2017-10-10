@@ -74,6 +74,11 @@ class Speech(TimeStampedModel):
     def __str__(self):
         return self.file_name
 
+    # def save(self, force_insert=False, force_update=False, *args, **kwargs):
+    #     if self.docx_output != '':
+    #         self.docx_output
+
+    #     super(Person, self).save(force_insert, force_update, *args, **kwargs)
     # def save(self, *args, **kwargs):
     #     is_new = True if not self.id else False
     #     super(Speech, self).save(*args, **kwargs)
@@ -90,4 +95,14 @@ def post_save_speech(sender, instance, created, **kwargs):
         post_save.disconnect(post_save_speech, sender=sender)
         operation_name = call_transcribe_request(instance.file_name)
         instance.operation_name = operation_name
+        instance.save()
+    if instance.docx_output.name != '':
+        post_save.disconnect(post_save_speech, sender=sender)
+        from docx import Document
+        document = Document(instance.docx_output.path)
+        content_done = ''
+        for para in document.paragraphs:
+            content_done += para.text
+        instance.content_done = content_done
+        instance.transcribe_done = True
         instance.save()
