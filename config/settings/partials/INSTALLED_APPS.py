@@ -1,7 +1,9 @@
 ADMIN_APPS = [
     # for admin
     # 'filer',
-    'suit',
+    # 'suit',
+    'jet.dashboard',
+    'jet',
     'easy_thumbnails',
 ]
 DJANGO_APPS = [

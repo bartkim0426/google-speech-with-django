@@ -16,6 +16,7 @@ psycopg2
 
 # django suit v2
 -e git://github.com/darklow/django-suit.git@v2#egg=django-suit
+django-jet
 
 # for easy file upload
 django-filer
