@@ -96,13 +96,16 @@ def post_save_speech(sender, instance, created, **kwargs):
         operation_name = call_transcribe_request(instance.file_name)
         instance.operation_name = operation_name
         instance.save()
-    if instance.docx_output.name != '':
-        post_save.disconnect(post_save_speech, sender=sender)
-        from docx import Document
-        document = Document(instance.docx_output.path)
-        content_done = ''
-        for para in document.paragraphs:
-            content_done += para.text
-        instance.content_done = content_done
-        instance.transcribe_done = True
-        instance.save()
+    try:
+        if instance.docx_output.name != '':
+            post_save.disconnect(post_save_speech, sender=sender)
+            from docx import Document
+            document = Document(instance.docx_output.path)
+            content_done = ''
+            for para in document.paragraphs:
+                content_done += para.text
+            instance.content_done = content_done
+            instance.transcribe_done = True
+            instance.save()
+    except:
+        pass
